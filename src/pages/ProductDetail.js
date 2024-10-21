@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '../services/productService';
-import { useCart } from '../state/cartStore'; // Utilisation de useCart
+import useCartStore from '../state/cartStore';
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
-    const { addToCart } = useCart(); // Utilisation de addToCart depuis useCart
+    const { addToCart } = useCartStore(); // Utilisation de addToCart depuis useCart
 
     useEffect(() => {
-        fetchProductById(id).then(setProduct);
+        // fetchProductById(id).then(setProduct);
     }, [id]);
 
     if (!product) return <div>Loading...</div>;

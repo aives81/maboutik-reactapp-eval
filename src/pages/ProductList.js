@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import { fetchProducts } from '../services/productService';
+import '../assets/Product.css';
+
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetchProducts().then(data => setProducts(data));
+        fetch('/api/products')
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    console.error('Something went wrong');
+                }
+            })
+            .then((data) => {
+                setProducts(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, []);
 
     return (
