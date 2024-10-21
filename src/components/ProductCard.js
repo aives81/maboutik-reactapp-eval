@@ -2,6 +2,7 @@ import React from 'react';
 import '../assets/Product.css'; // Assure-toi d'importer le fichier CSS si tu en as un
 import productImg from '../assets/icone.webp'; // Importe l'image du produit
 import useCartStore from "../state/cartStore";
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
     const addToCart = useCartStore(state => state.addToCart);
@@ -17,6 +18,7 @@ const ProductCard = ({ product }) => {
             <p className="product-price">{product.price.toFixed(2)} €</p>
             <p className="product-gender">{product.gender}</p>
             <p className="product-description">{product.description}</p>
+            <Link to={`/product/${product.id}`} className="view-details">Voir Détails</Link> <br/><br/>
             <button className="add-to-cart" onClick={handleAddToCart}>Ajouter au panier</button>
         </div>
     );
